@@ -5,6 +5,7 @@ import cz.mformanek.ataccama.service.DataService;
 import cz.mformanek.ataccama.service.SchemaService;
 import cz.mformanek.ataccama.service.TableService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
-@RequestMapping(value = "database")
+@RequestMapping(value = "database/{databaseName}")
 @RequiredArgsConstructor
 public class DatabaseController {
 
@@ -24,6 +26,7 @@ public class DatabaseController {
 
     @GetMapping("/schemas")
     public List<Map<String, String>> schemas(){
+        log.info("fetching schemas");
         return schemaService.getSchemas();
     }
 
