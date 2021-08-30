@@ -1,20 +1,41 @@
 version: "3.8"
 
 services:
-  mariadb:
+  primary:
     image: mariadb:latest
-    container_name: mariadb
+    container_name: primary
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/primary/:/docker-entrypoint-initdb.d/:ro
+  mariadb-1:
+    image: mariadb:latest
+    container_name: mariadb-1
     environment:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MARIADB_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
     ports:
-      - 3306:3306
+      - 3307:3306
+  mariadb-2:
+    image: mariadb:latest
+    container_name: mariadb-2
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MARIADB_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - 3308:3306
   adminer:
     image: adminer:latest
     container_name: adminer
     environment:
-      ADMINER_DEFAULT_SERVER: mariadb
+      ADMINER_DEFAULT_SERVER: primary
     ports:
       - 7777:8080
