@@ -1,6 +1,7 @@
 package cz.mformanek.ataccama.controller;
 
 import cz.mformanek.ataccama.service.SchemaService;
+import cz.mformanek.ataccama.service.TableService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,6 +25,9 @@ class DatabaseControllerTest {
     @MockBean
     SchemaService schemaService;
 
+    @MockBean
+    TableService tableService;
+
     @Test
     void shouldHaveSchemasEndpoint() throws Exception {
         mockMvc.perform(get("/database/schemas"))
@@ -34,6 +38,18 @@ class DatabaseControllerTest {
     void shouldObtainSchemasFromService() {
         databaseController.schemas();
         verify(schemaService, times(1)).getSchemas();
+    }
+
+    @Test
+    void shouldHaveTablesEndpoint() throws Exception {
+        mockMvc.perform(get("/database/tables"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldObtainTablesFromService() {
+        databaseController.tables();
+        verify(schemaService, times(1)).getTables();
     }
 
 }
