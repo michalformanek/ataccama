@@ -8,11 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class DataSourceContextHolder {
-    private static ThreadLocal<String> threadLocal;
 
-    public DataSourceContextHolder() {
-        threadLocal = new ThreadLocal<>();
-    }
+    private static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
     public void setDatasource(String datasource) {
         threadLocal.set(datasource);
@@ -25,4 +22,5 @@ public class DataSourceContextHolder {
     public static void clear() {
         threadLocal.remove();
     }
+
 }

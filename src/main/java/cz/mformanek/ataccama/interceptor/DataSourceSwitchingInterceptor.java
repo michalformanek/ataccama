@@ -1,5 +1,6 @@
 package cz.mformanek.ataccama.interceptor;
 
+import cz.mformanek.ataccama.configuration.DataSourceConfiguration;
 import cz.mformanek.ataccama.configuration.DataSourceContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import java.util.TreeMap;
 @RequiredArgsConstructor
 public class DataSourceSwitchingInterceptor implements HandlerInterceptor {
 
+    private final DataSourceConfiguration dataSourceConfiguration;
     private final DataSourceContextHolder dataSourceContextHolder;
 
     @Override
@@ -29,7 +31,7 @@ public class DataSourceSwitchingInterceptor implements HandlerInterceptor {
 
         Map<String, String> map = new TreeMap<>((Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
         final String databaseName = map.get("databaseName");
-        dataSourceContextHolder.setDatasource(databaseName); //Neexistujici datasource
+        dataSourceConfiguration.setCurrentDatasource(databaseName); //Neexistujici datasource, zahazat query defaultu
         log.info(databaseName);
         log.info("---method executed---");
         return true;
@@ -39,6 +41,7 @@ public class DataSourceSwitchingInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
         log.info("---method executed---");
+        dataSourceContextHolder.clear();
     }
 
     @Override
