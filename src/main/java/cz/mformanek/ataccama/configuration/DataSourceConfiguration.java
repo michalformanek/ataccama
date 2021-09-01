@@ -1,8 +1,7 @@
 package cz.mformanek.ataccama.configuration;
 
-import cz.mformanek.ataccama.exception.TenantNotFoundException;
+import cz.mformanek.ataccama.tenant.exception.TenantNotFoundException;
 import cz.mformanek.ataccama.tenant.model.Tenant;
-import cz.mformanek.ataccama.tenant.repository.TenantRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.boot.jdbc.DataSourceBuilder;

@@ -1,7 +1,7 @@
 package cz.mformanek.ataccama.tenant.service;
 
 import cz.mformanek.ataccama.configuration.DataSourceConfiguration;
-import cz.mformanek.ataccama.exception.TenantNotFoundException;
+import cz.mformanek.ataccama.tenant.exception.TenantNotFoundException;
 import cz.mformanek.ataccama.tenant.mapper.TenantMapper;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import cz.mformanek.ataccama.tenant.repository.TenantRepository;

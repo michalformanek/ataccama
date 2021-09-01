@@ -14,19 +14,19 @@ public class DatabaseService {
 
     private final InformationSchemaDao informationSchemaDao;
 
-    public List<Map<String, String>> getDataPreview(String test, String tablice) {
+    public List<Map<String, String>> getDataPreview(String schema, String table) {
         throw new NotImplementedException();
     }
 
-    public List<Map<String, String>> getColumns(String test, String tablice) {
-        throw new NotImplementedException();
+    public List<Map<String, String>> getColumns(String schema, String table) {
+        return informationSchemaDao.getColumns(schema, table);
     }
 
-    public List<Map<String, String>> getTables(String test) {
-        throw new NotImplementedException();
+    public List<Map<String, String>> getTables(String schema) {
+        return informationSchemaDao.getTables(schema);
     }
 
     public List<Map<String, String>> getSchemas() {
-        throw new NotImplementedException();
+        return informationSchemaDao.getSchemas();
     }
 }

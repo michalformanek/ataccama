@@ -1,11 +1,9 @@
 package cz.mformanek.ataccama.database.dao;
 
-import cz.mformanek.ataccama.mapper.MapMapper;
+import cz.mformanek.ataccama.database.mapper.MapMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;

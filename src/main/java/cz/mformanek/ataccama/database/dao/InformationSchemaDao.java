@@ -1,6 +1,6 @@
 package cz.mformanek.ataccama.database.dao;
 
-import cz.mformanek.ataccama.mapper.MapMapper;
+import cz.mformanek.ataccama.database.mapper.MapMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class InformationSchemaDao extends NamedParameterJdbcDaoSupport {
 
     public List<Map<String, String>> getSchemas() {
-        //We could get medatata from connection.getMetadata().getCatalogs(), which gives less information about schema
+        //We could get metadata from connection.getMetadata()..., which gives less information
         final String query = "SELECT * FROM INFORMATION_SCHEMA.SCHEMATA";
         return getNamedParameterJdbcTemplate().query(query, new MapMapper());
     }

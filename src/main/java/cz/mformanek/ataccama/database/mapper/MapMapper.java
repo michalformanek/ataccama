@@ -1,4 +1,4 @@
-package cz.mformanek.ataccama.mapper;
+package cz.mformanek.ataccama.database.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
 
