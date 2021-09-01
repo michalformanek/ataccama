@@ -3,6 +3,7 @@ package cz.mformanek.ataccama.tenant.mapper;
 import cz.mformanek.ataccama.tenant.dto.TenantDto;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -12,8 +13,12 @@ public interface TenantMapper {
 
     TenantMapper INSTANCE = Mappers.getMapper(TenantMapper.class);
 
-    TenantDto map(Tenant car);
+    Tenant map(TenantDto tenant);
 
-    List<TenantDto> map(List<Tenant> employees);
+    TenantDto map(Tenant tenant);
+
+    Tenant update(@MappingTarget Tenant original, Tenant modified);
+
+    List<TenantDto> map(List<Tenant> tenant);
 
 }

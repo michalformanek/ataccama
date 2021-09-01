@@ -1,9 +1,6 @@
 package cz.mformanek.ataccama.controller;
 
-import cz.mformanek.ataccama.service.ColumnService;
-import cz.mformanek.ataccama.service.DataService;
-import cz.mformanek.ataccama.service.SchemaService;
-import cz.mformanek.ataccama.service.TableService;
+import cz.mformanek.ataccama.database.service.DatabaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,30 +16,26 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class DatabaseController {
 
-    private final SchemaService schemaService;
-    private final TableService tableService;
-    private final ColumnService columnService;
-    private final DataService dataService;
+    private final DatabaseService databaseService;
 
     @GetMapping("/schemas")
     public List<Map<String, String>> schemas(){
-        log.info("fetching schemas");
-        return schemaService.getSchemas();
+        return databaseService.getSchemas();
     }
 
     @GetMapping("/tables")
     public List<Map<String, String>> tables(){
-        return tableService.getTables("test");
+        return databaseService.getTables("test");
     }
 
     @GetMapping("/columns")
     public List<Map<String, String>> columns(){
-        return columnService.getColumns("test","tablice");
+        return databaseService.getColumns("test","tablice");
     }
 
     @GetMapping("/data")
     public List<Map<String, String>> data(){
         //What is meant by "Data preview of the table"? Actual values or some random mocks
-        return dataService.getDataPreview("test","tablice");
+        return databaseService.getDataPreview("test","tablice");
     }
 }

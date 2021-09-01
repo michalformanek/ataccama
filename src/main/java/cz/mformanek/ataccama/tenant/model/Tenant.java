@@ -1,6 +1,9 @@
 package cz.mformanek.ataccama.tenant.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "tenants")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tenant {
 
     @Id
@@ -24,6 +29,6 @@ public class Tenant {
     @Column(nullable = false, columnDefinition = "varchar(255)")
     String username;
     @Column(nullable = false, columnDefinition = "varchar(255)")
-    String password; //TODO: Sanitize output
+    String password;
 
 }

@@ -15,8 +15,8 @@ public class MapMapper implements RowMapper<Map<String, String>> {
         final var rsMetaData = rs.getMetaData();
         final var columnCount = rsMetaData.getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
-            final String key = rsMetaData.getColumnName(i);
-            final String value = rs.getString(i);
+            final var key = rsMetaData.getColumnName(i);
+            final var value = rs.getString(i);
             result.put(key, value);
         }
 

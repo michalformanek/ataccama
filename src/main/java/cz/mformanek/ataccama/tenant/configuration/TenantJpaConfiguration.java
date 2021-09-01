@@ -2,7 +2,6 @@ package cz.mformanek.ataccama.tenant.configuration;
 
 import cz.mformanek.ataccama.tenant.repository.TenantRepository;
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.mapstruct.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Properties;
 
 @Configuration
@@ -24,7 +21,7 @@ import java.util.Properties;
         entityManagerFactoryRef = "tenantEntityManager",
         transactionManagerRef = "tenantTransactionManager"
 )
-public class TenantDataSourceConfiguration {
+public class TenantJpaConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean tenantEntityManager() {
@@ -63,7 +60,7 @@ public class TenantDataSourceConfiguration {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "datasource.tenant")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource tenantDataSource() {
         return DataSourceBuilder.create().build();
     }

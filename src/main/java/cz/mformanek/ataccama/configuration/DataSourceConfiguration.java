@@ -4,6 +4,7 @@ import cz.mformanek.ataccama.exception.TenantNotFoundException;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import cz.mformanek.ataccama.tenant.repository.TenantRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +41,7 @@ public class DataSourceConfiguration {
 
     public void addDataSource(Tenant tenant) {
         DataSource dataSource = DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url(String.format("jdbc:mysql://%s:%s/%s", tenant.getHostname(), tenant.getPort(), tenant.getDatabaseName()))
                 .username(tenant.getUsername())
                 .password(tenant.getPassword())
@@ -57,5 +58,8 @@ public class DataSourceConfiguration {
         dataSourceContextHolder.setDatasource(name);
     }
 
+    public void removeDataSource(String name) {
+        throw new NotImplementedException();
+    }
 }
 

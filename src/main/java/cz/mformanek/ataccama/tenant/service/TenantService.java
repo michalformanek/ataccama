@@ -1,7 +1,8 @@
 package cz.mformanek.ataccama.tenant.service;
 
 import cz.mformanek.ataccama.configuration.DataSourceConfiguration;
-import cz.mformanek.ataccama.tenant.configuration.TenantDataSourceConfiguration;
+import cz.mformanek.ataccama.exception.TenantNotFoundException;
+import cz.mformanek.ataccama.tenant.mapper.TenantMapper;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import cz.mformanek.ataccama.tenant.repository.TenantRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +17,36 @@ public class TenantService {
 
     private final TenantRepository tenantRepository;
     private final DataSourceConfiguration dataSourceConfiguration;
+
+    @PostConstruct
+    public void preloadTenants() {
+        tenantRepository.findAll().forEach(dataSourceConfiguration::addDataSource);
+    }
+
     public List<Tenant> getTenants() {
         return tenantRepository.findAll();
     }
 
     public Tenant getTenantById(String id) {
-        return tenantRepository.getById(id); //TODO: Handle optional
+        return tenantRepository.findById(id).orElseThrow(TenantNotFoundException::new);
     }
 
-    @PostConstruct
-    public void preloadTenants() {
-        tenantRepository.findAll().forEach(dataSourceConfiguration::addDataSource);
+    public Tenant saveTenant(Tenant tenant) {
+        final var saved = tenantRepository.save(tenant);
+        dataSourceConfiguration.addDataSource(saved);
+        return saved;
+    }
+
+    public Tenant updateTenant(String id, Tenant tenant) {
+        final var original = tenantRepository.findById(id).orElseThrow(TenantNotFoundException::new);
+        final var updated = TenantMapper.INSTANCE.update(original, tenant);
+        final var saved = tenantRepository.save(updated);
+        dataSourceConfiguration.addDataSource(saved);
+        return saved;
+    }
+
+    public void deleteTenant(String id) {
+        tenantRepository.deleteById(id);
+        dataSourceConfiguration.removeDataSource(id);
     }
 }
