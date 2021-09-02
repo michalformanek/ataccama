@@ -35,7 +35,7 @@ public class DatabaseController {
     }
 
     @GetMapping("/{schema}/{table}/data")
-    public List<Map<String, String>> data(@PathVariable String schema, @PathVariable String table){
+    public List<Map<String, String>> getDataPreview(@PathVariable String schema, @PathVariable String table){
         //What is meant by "Data preview of the table"? Actual values or some random mocks
         return databaseService.getDataPreview(schema, table);
     }

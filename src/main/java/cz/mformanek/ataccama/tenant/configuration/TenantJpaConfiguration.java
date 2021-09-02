@@ -37,8 +37,7 @@ public class TenantJpaConfiguration {
 
     private Properties jpaHibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.hbm2ddl.auto", "none");
-        properties.put("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
         properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
         properties.put("hibernate.jdbc.lob.non_contextual_creation", false);
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
@@ -48,7 +47,7 @@ public class TenantJpaConfiguration {
 
     private HibernateJpaVendorAdapter vendorAdapter() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
+        vendorAdapter.setShowSql(false);
         return vendorAdapter;
     }
 

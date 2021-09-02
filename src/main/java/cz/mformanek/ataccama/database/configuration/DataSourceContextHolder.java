@@ -1,4 +1,4 @@
-package cz.mformanek.ataccama.configuration;
+package cz.mformanek.ataccama.database.configuration;
 
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class DataSourceContextHolder {
 
-    private static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String> datasource = new ThreadLocal<>();
 
     public void setDatasource(String datasource) {
-        threadLocal.set(datasource);
+        DataSourceContextHolder.datasource.set(datasource);
     }
 
     public String currentDatasource() {
-        return threadLocal.get();
+        return datasource.get();
     }
 
-    public static void clear() {
-        threadLocal.remove();
+    public void clear() {
+        DataSourceContextHolder.datasource.remove();
     }
 
 }

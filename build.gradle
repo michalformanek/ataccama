@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.5.10'
+	implementation 'org.apache.commons:commons-text:1.9'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'

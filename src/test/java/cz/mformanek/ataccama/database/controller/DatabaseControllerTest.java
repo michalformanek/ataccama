@@ -1,8 +1,7 @@
 package cz.mformanek.ataccama.database.controller;
 
 import cz.mformanek.ataccama.database.service.DatabaseService;
-import cz.mformanek.ataccama.interceptor.DataSourceSwitchingInterceptor;
-import org.junit.jupiter.api.BeforeAll;
+import cz.mformanek.ataccama.database.interceptor.DataSourceSwitchingInterceptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

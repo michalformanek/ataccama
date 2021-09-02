@@ -1,5 +1,6 @@
 package cz.mformanek.ataccama.database.service;
 
+import cz.mformanek.ataccama.database.dao.DataPreviewDao;
 import cz.mformanek.ataccama.database.dao.InformationSchemaDao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,9 @@ class DatabaseServiceTest {
 
     @Mock
     InformationSchemaDao informationSchemaDao;
+
+    @Mock
+    DataPreviewDao dataPreviewDao;
 
     @InjectMocks
     DatabaseService databaseService;
@@ -52,7 +56,8 @@ class DatabaseServiceTest {
 
     @Test
     void shouldReturnDataPreview() {
-        databaseService.getDataPreview("table", "schema");
+        databaseService.getDataPreview("schema", "table");
+        verify(dataPreviewDao, times(1)).getDataPreview(eq("schema"), eq("table"));
     }
 
 }

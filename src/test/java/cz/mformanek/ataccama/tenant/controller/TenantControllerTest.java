@@ -1,7 +1,7 @@
 package cz.mformanek.ataccama.tenant.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cz.mformanek.ataccama.interceptor.DataSourceSwitchingInterceptor;
+import cz.mformanek.ataccama.database.interceptor.DataSourceSwitchingInterceptor;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import cz.mformanek.ataccama.tenant.service.TenantService;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

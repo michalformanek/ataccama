@@ -1,6 +1,6 @@
-package cz.mformanek.ataccama.configuration;
+package cz.mformanek.ataccama.database.configuration;
 
-import cz.mformanek.ataccama.interceptor.DataSourceSwitchingInterceptor;
+import cz.mformanek.ataccama.database.interceptor.DataSourceSwitchingInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

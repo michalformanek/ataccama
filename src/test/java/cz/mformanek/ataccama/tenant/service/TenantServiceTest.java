@@ -1,6 +1,6 @@
 package cz.mformanek.ataccama.tenant.service;
 
-import cz.mformanek.ataccama.configuration.DataSourceConfiguration;
+import cz.mformanek.ataccama.database.configuration.DataSourceManager;
 import cz.mformanek.ataccama.tenant.exception.TenantNotFoundException;
 import cz.mformanek.ataccama.tenant.model.Tenant;
 import cz.mformanek.ataccama.tenant.repository.TenantRepository;
@@ -13,16 +13,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
 
 @ExtendWith(MockitoExtension.class)
 class TenantServiceTest {
 
     @Mock
-    DataSourceConfiguration dataSourceConfiguration;
+    DataSourceManager dataSourceManager;
 
     @Mock
     TenantRepository tenantRepository;
@@ -58,14 +57,14 @@ class TenantServiceTest {
         when(tenantRepository.save(any())).thenReturn(tenant);
         final var result = tenantService.saveTenant(tenant);
         verify(tenantRepository,times(1)).save(any());
-        verify(dataSourceConfiguration).addDataSource(any());
+        verify(dataSourceManager).addDataSource(any());
     }
 
     @Test
     public void shouldDeleteTenant() {
         tenantService.deleteTenant("tenant");
         verify(tenantRepository,times(1)).deleteById(any());
-        verify(dataSourceConfiguration).removeDataSource(any());
+        verify(dataSourceManager).removeDataSource(any());
     }
 
     @Test
@@ -74,7 +73,7 @@ class TenantServiceTest {
         final Tenant updatedTenant = tenantService.updateTenant("tenant", new Tenant());
         verify(tenantRepository,times(1)).findById(any());
         verify(tenantRepository,times(1)).save(any());
-        verify(dataSourceConfiguration).addDataSource(any());
+        verify(dataSourceManager).addDataSource(any());
     }
 
 }
